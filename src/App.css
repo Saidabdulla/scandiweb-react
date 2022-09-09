@@ -20,5 +20,9 @@ html {
   color: #5ece7b;
   font-weight: 600;
   letter-spacing: 1px;
-  border-bottom: 1px solid#5ECE7B;
+  border-bottom: 2px solid#5ECE7B;
+}
+
+.currency-active {
+  background: #eeeeee;
 }
