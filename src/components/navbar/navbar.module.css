@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0px 100px;
+  align-items: center;
+  position: relative;
+}
+
+.list {
+  display: flex;
+  list-style: none;
+}
+
+.link {
+  text-transform: uppercase;
+  border-bottom: 0;
+  color: black;
+  padding: 30px 16px;
+  text-decoration: none;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+}

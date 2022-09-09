@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
 import Tech from "./components/tech/tech";
 import All from "./components/all/all";
@@ -13,7 +13,8 @@ class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navbar />}>
-              <Route index element={<All />} />
+              <Route index element={<Navigate to="all" replace />} />
+              <Route path="all" element={<All />} />
               <Route path="tech" element={<Tech />} />
               <Route path="clothes" element={<Clothes />} />
             </Route>

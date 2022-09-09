@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway&display=swap");
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+a {
+  font-family: "Raleway", sans-serif;
+}
+
+html {
+  width: 100%;
+}
+
+/* navbar active class */
+.active {
+  color: #5ece7b;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border-bottom: 1px solid#5ECE7B;
+}
