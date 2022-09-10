@@ -11,6 +11,20 @@ import { ReactComponent as IconCurrency } from "../../assets/img/dollar_and_carr
 import { ReactComponent as IconCart } from "../../assets/img/empty_cart.svg";
 
 class Navbar extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      showCurrencyModal: false,
+    };
+  }
+
+  clickCurrencyHandler = (value) => {
+    this.props.changeCurrency(value);
+    localStorage.setItem("currency", value);
+    this.setState({ showCurrencyModal: false });
+  };
+
   render() {
     return (
       <>
@@ -36,39 +50,46 @@ class Navbar extends Component {
           </NavLink>
 
           <div className={styles.right}>
-            <button type="button" className={styles["currency-btn"]}>
+            <button
+              type="button"
+              className={styles["currency-btn"]}
+              onClick={() =>
+                this.setState((prevState, props) => ({
+                  showCurrencyModal: !prevState.showCurrencyModal,
+                }))
+              }
+            >
               <IconCurrency />
             </button>
             <button type="button" className={styles["cart-btn"]}>
               <IconCart />
             </button>
-            {console.log(this.props.currency)}
 
-            <ul className={styles["currency-modal"]}>
-              <Query query={GET_CURRENCIES}>
-                {({ loading, error, data }) => {
-                  if (error) return error;
-                  if (loading || !data) return "loading...";
+            {this.state.showCurrencyModal ? (
+              <ul className={styles["currency-modal"]}>
+                <Query query={GET_CURRENCIES}>
+                  {({ loading, error, data }) => {
+                    if (error) return error;
+                    if (loading || !data) return "loading...";
 
-                  const { currencies } = data;
-                  return currencies.map((cy) => (
-                    <li
-                      onClick={() => {
-                        this.props.changeCurrency(cy.symbol);
-                      }}
-                      className={
-                        cy.symbol === this.props.currency.value
-                          ? "currency-active"
-                          : ""
-                      }
-                      key={cy.symbol}
-                    >
-                      {cy.symbol} {cy.label}
-                    </li>
-                  ));
-                }}
-              </Query>
-            </ul>
+                    const { currencies } = data;
+                    return currencies.map((cy) => (
+                      <li
+                        onClick={() => this.clickCurrencyHandler(cy.symbol)}
+                        className={
+                          cy.symbol === localStorage.getItem("currency")
+                            ? "currency-active"
+                            : ""
+                        }
+                        key={cy.symbol}
+                      >
+                        {cy.symbol} {cy.label}
+                      </li>
+                    ));
+                  }}
+                </Query>
+              </ul>
+            ) : null}
           </div>
         </div>
 

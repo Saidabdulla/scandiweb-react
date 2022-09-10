@@ -3,13 +3,14 @@ const initialState = {
 };
 
 export default function curencyReducer(state = initialState, action) {
-  if (action.payload === undefined) {
-    return {
-      ...state,
-    };
-  } else
-    return {
-      ...state,
-      value: action.payload,
-    };
+  const ls = localStorage.getItem("currency");
+
+  if (ls === null && action.payload === undefined) {
+    localStorage.setItem("currency", initialState.value);
+
+    return { ...state };
+  }
+  if (action.payload === undefined && ls !== null) {
+    return { ...state, value: ls };
+  } else return { ...state, value: action.payload };
 }
