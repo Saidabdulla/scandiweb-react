@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { Query } from "@apollo/client/react/components";
+import { connect } from "react-redux";
+import { changeCurrency } from "../../actions/currency-actions";
 import { GET_CATEGORIES, GET_CURRENCIES } from "../../graphql/queries";
 
 import styles from "./navbar.module.css";
@@ -40,6 +42,7 @@ class Navbar extends Component {
             <button type="button" className={styles["cart-btn"]}>
               <IconCart />
             </button>
+            {console.log(this.props.currency)}
 
             <ul className={styles["currency-modal"]}>
               <Query query={GET_CURRENCIES}>
@@ -50,9 +53,15 @@ class Navbar extends Component {
                   const { currencies } = data;
                   return currencies.map((cy) => (
                     <li
-                      className={cy.symbol === "$" ? "currency-active" : ""}
+                      onClick={() => {
+                        this.props.changeCurrency(cy.symbol);
+                      }}
+                      className={
+                        cy.symbol === this.props.currency.value
+                          ? "currency-active"
+                          : ""
+                      }
                       key={cy.symbol}
-                      onClick={() => console.log(cy.symbol)}
                     >
                       {cy.symbol} {cy.label}
                     </li>
@@ -60,8 +69,6 @@ class Navbar extends Component {
                 }}
               </Query>
             </ul>
-
-            {/* <div className={styles["currency-modal"]}></div> */}
           </div>
         </div>
 
@@ -71,4 +78,8 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = (state) => ({
+  currency: state.currency,
+});
+
+export default connect(mapStateToProps, { changeCurrency })(Navbar);
