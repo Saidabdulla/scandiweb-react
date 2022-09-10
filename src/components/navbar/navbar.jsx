@@ -19,6 +19,7 @@ class Navbar extends Component {
     };
   }
 
+  // updates store & localstorage and closes currency modal
   clickCurrencyHandler = (value) => {
     this.props.changeCurrency(value);
     localStorage.setItem("currency", value);
@@ -65,6 +66,7 @@ class Navbar extends Component {
               <IconCart />
             </button>
 
+            {/* show the modal conditionally */}
             {this.state.showCurrencyModal ? (
               <ul className={styles["currency-modal"]}>
                 <Query query={GET_CURRENCIES}>
