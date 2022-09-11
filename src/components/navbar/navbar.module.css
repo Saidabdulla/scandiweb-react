@@ -45,12 +45,24 @@
   padding: 5px;
 }
 
-.cart-btn {
+.currency-btn {
   padding: 5px 10px;
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.currency-btn svg {
+  margin-bottom: -5px;
+  margin-left: 10px;
 }
 
 .currency-modal {
   position: absolute;
+  z-index: 2;
   left: -5%;
   top: 130%;
   width: 115%;

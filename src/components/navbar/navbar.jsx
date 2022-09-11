@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, Link } from "react-router-dom";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
 import { changeCurrency } from "../../actions/currency-actions";
@@ -7,7 +7,7 @@ import { GET_CATEGORIES, GET_CURRENCIES } from "../../graphql/queries";
 
 import styles from "./navbar.module.css";
 import { ReactComponent as IconLogo } from "../../assets/img/VSF.svg";
-import { ReactComponent as IconCurrency } from "../../assets/img/dollar_and_carret.svg";
+import { ReactComponent as IconDollar } from "../../assets/img/dollar_and_carret.svg";
 import { ReactComponent as IconCart } from "../../assets/img/empty_cart.svg";
 
 class Navbar extends Component {
@@ -46,9 +46,9 @@ class Navbar extends Component {
             </Query>
           </ul>
 
-          <NavLink className={styles.logo} to="/">
+          <Link className={styles.logo} to="/all">
             <IconLogo />
-          </NavLink>
+          </Link>
 
           <div className={styles.right}>
             <button
@@ -60,7 +60,21 @@ class Navbar extends Component {
                 }))
               }
             >
-              <IconCurrency />
+              <div>{this.props.currency.value}</div>
+              <svg
+                width="8"
+                height="4"
+                viewBox="0 0 8 4"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M1 0.5L4 3.5L7 0.5"
+                  stroke="black"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </button>
             <button type="button" className={styles["cart-btn"]}>
               <IconCart />
