@@ -1,7 +1,7 @@
 /* Wanna use this file in 3 components */
 
 .wrapper {
-  padding: 0 100px;
+  padding: 0 100px 100px 100px;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;

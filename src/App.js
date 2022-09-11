@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/navbar/navbar";
+import Footer from "./components/footer/footer";
 import Tech from "./components/tech/tech";
 import All from "./components/all/all";
 import Clothes from "./components/clothes/clothes";
@@ -20,6 +21,7 @@ class App extends Component {
             </Route>
           </Routes>
         </BrowserRouter>
+        <Footer />
       </div>
     );
   }
