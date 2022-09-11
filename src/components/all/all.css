@@ -1,0 +1,13 @@
+/* Wanna use this file in 3 components */
+
+.wrapper {
+  padding: 0 100px;
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.title {
+  margin: 80px 0;
+  font-size: 42px;
+}
