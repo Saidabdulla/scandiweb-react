@@ -5,6 +5,7 @@ import Footer from "./components/footer/footer";
 import Tech from "./components/tech/tech";
 import All from "./components/all/all";
 import Clothes from "./components/clothes/clothes";
+import Product from "./components/product/product";
 import "./App.css";
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
               <Route path="all" element={<All />} />
               <Route path="tech" element={<Tech />} />
               <Route path="clothes" element={<Clothes />} />
+              <Route path=":id" element={<Product />} />
             </Route>
           </Routes>
         </BrowserRouter>

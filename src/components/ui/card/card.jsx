@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import styles from "./card.module.css";
 
 class Card extends Component {
@@ -14,6 +15,7 @@ class Card extends Component {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line array-callback-return
     this.state.product.prices.find((price) => {
       if (price.currency.symbol === this.props.currency.value) {
         return this.setState({
@@ -26,6 +28,7 @@ class Card extends Component {
 
   componentDidUpdate(previousProps, previousState) {
     if (previousProps.currency.value !== this.props.currency.value) {
+      // eslint-disable-next-line array-callback-return
       this.state.product.prices.find((price) => {
         if (price.currency.symbol === this.props.currency.value) {
           return this.setState({
@@ -44,7 +47,7 @@ class Card extends Component {
           !this.state.product.inStock ? styles["out-of-stock"] : ""
         }`}
       >
-        <a href="#" className={styles["card-link"]}>
+        <Link to={this.props.product.id} className={styles["card-link"]}>
           <div className={styles.container}>
             {!this.state.product.inStock ? (
               <div className={styles["stock-overlay"]}>
@@ -65,7 +68,7 @@ class Card extends Component {
               {this.state.symbol} {this.state.amount}
             </div>
           </div>
-        </a>
+        </Link>
       </div>
     );
   }

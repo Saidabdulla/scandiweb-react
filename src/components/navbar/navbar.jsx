@@ -7,7 +7,6 @@ import { GET_CATEGORIES, GET_CURRENCIES } from "../../graphql/queries";
 
 import styles from "./navbar.module.css";
 import { ReactComponent as IconLogo } from "../../assets/img/VSF.svg";
-import { ReactComponent as IconDollar } from "../../assets/img/dollar_and_carret.svg";
 import { ReactComponent as IconCart } from "../../assets/img/empty_cart.svg";
 
 class Navbar extends Component {
@@ -71,8 +70,8 @@ class Navbar extends Component {
                 <path
                   d="M1 0.5L4 3.5L7 0.5"
                   stroke="black"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
             </button>
