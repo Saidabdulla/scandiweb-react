@@ -54,10 +54,11 @@
 .name {
   font-size: 30px;
   margin-top: 8px;
+  margin-bottom: 18px;
 }
 
 .size-title {
-  margin-top: 42px;
+  margin-top: 24px;
   font-weight: bold;
   font-size: 18px;
   text-transform: uppercase;

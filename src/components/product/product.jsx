@@ -12,13 +12,30 @@ class Product extends Component {
     this.state = {
       id: "",
       imageUrl: "",
-      activeSize: "",
     };
   }
 
   componentDidMount() {
     const { id } = this.props.params;
     this.setState({ id: id });
+  }
+
+  setSelectedAttr(name, value) {
+    const newState = {};
+    let str = name.replaceAll(" ", "");
+    let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
+    newState[`selected${secondPart}`] = value;
+    
+    this.setState(newState);
+  }
+
+  checkActiveOrnot(name, value) {
+    let str = name.replaceAll(" ", "");
+    let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
+
+    const stateName = `selected${secondPart}`;
+
+    return value === this.state[stateName];
   }
 
   render() {
@@ -66,24 +83,23 @@ class Product extends Component {
                 {console.log(this.state)}
 
                 {product.attributes.map((att) => {
-                  return att.name.toLowerCase() === "size" ? (
+                  return att.name.toLowerCase() !== "color" ? (
                     <div className={styles.size} key={att.name}>
-                      <div className={styles["size-title"]}>size: </div>
+                      <div className={styles["size-title"]}>{att.name}: </div>
                       <div className={styles["size-row"]}>
-                        {att.items.map((size) => (
+                        {att.items.map((item) => (
                           <div
-                            key={size.value}
+                            key={item.value}
                             onClick={() =>
-                              this.setState({ activeSize: size.value })
+                              this.setSelectedAttr(att.name, item.value)
                             }
                           >
                             <SizeBtn
-                              active={
-                                size.value === this.state.activeSize
-                                  ? true
-                                  : false
-                              }
-                              text={size.value}
+                              active={this.checkActiveOrnot(
+                                att.name,
+                                item.value
+                              )}
+                              text={item.value}
                             />
                           </div>
                         ))}
