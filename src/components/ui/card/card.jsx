@@ -47,7 +47,10 @@ class Card extends Component {
           !this.state.product.inStock ? styles["out-of-stock"] : ""
         }`}
       >
-        <Link to={this.props.product.id} className={styles["card-link"]}>
+        <Link
+          to={`/product/${this.props.product.id}`}
+          className={styles["card-link"]}
+        >
           <div className={styles.container}>
             {!this.state.product.inStock ? (
               <div className={styles["stock-overlay"]}>

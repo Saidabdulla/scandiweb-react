@@ -16,10 +16,10 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Navbar />}>
               <Route index element={<Navigate to="all" replace />} />
-              <Route path="all" element={<All />} />
+              <Route path="all" element={<All />}></Route>
               <Route path="tech" element={<Tech />} />
               <Route path="clothes" element={<Clothes />} />
-              <Route path=":id" element={<Product />} />
+              <Route path="/product/:id" element={<Product />} />
             </Route>
           </Routes>
         </BrowserRouter>

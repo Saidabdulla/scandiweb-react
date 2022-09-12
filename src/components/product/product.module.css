@@ -1,0 +1,42 @@
+.pdp {
+  display: flex;
+  margin: 0 auto;
+  padding: 80px 100px 100px 100px;
+  width: 100%;
+  max-width: 1440px;
+}
+
+.left {
+  width: 62%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.images {
+  width: auto;
+  overflow-y: auto;
+  width: 15%;
+}
+
+.container {
+  width: 95px;
+  height: 95px;
+  margin-bottom: 30px;
+}
+
+.container img {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  object-fit: cover;
+  object-position: top left;
+  cursor: pointer;
+}
+
+.image {
+  width: 82%;
+}
+
+.image img {
+  width: 100%;
+}
