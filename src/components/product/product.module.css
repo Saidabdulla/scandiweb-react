@@ -40,3 +40,31 @@
 .image img {
   width: 100%;
 }
+
+.right {
+  padding-left: 100px;
+}
+
+.brand {
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+.name {
+  font-size: 30px;
+  margin-top: 8px;
+}
+
+.size-title {
+  margin-top: 42px;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.size-row {
+  display: flex;
+  gap: 12px;
+}

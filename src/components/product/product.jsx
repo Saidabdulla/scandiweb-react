@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Query } from "@apollo/client/react/components";
 import { GET_PRODUCT_BY_ID } from "../../graphql/queries";
 import { withParams } from "../../utils/withParams";
+import SizeBtn from "../ui/size-btn/size";
 import styles from "./product.module.css";
 
 class Product extends Component {
@@ -11,6 +12,7 @@ class Product extends Component {
     this.state = {
       id: "",
       imageUrl: "",
+      activeSize: "",
     };
   }
 
@@ -56,6 +58,39 @@ class Product extends Component {
                     alt="product"
                   />
                 </div>
+              </div>
+              <div className={styles.right}>
+                <div className={styles.brand}>{product.brand}</div>
+                <div className={styles.name}>{product.name}</div>
+
+                {console.log(this.state)}
+
+                {product.attributes.map((att) => {
+                  return att.name.toLowerCase() === "size" ? (
+                    <div className={styles.size} key={att.name}>
+                      <div className={styles["size-title"]}>size: </div>
+                      <div className={styles["size-row"]}>
+                        {att.items.map((size) => (
+                          <div
+                            key={size.value}
+                            onClick={() =>
+                              this.setState({ activeSize: size.value })
+                            }
+                          >
+                            <SizeBtn
+                              active={
+                                size.value === this.state.activeSize
+                                  ? true
+                                  : false
+                              }
+                              text={size.value}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null;
+                })}
               </div>
             </main>
           );
