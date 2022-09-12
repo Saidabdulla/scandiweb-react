@@ -67,5 +67,12 @@
 
 .size-row {
   display: flex;
-  gap: 12px;
+}
+
+.size-row .big-btn {
+  margin-right: 12px;
+}
+
+.size-row .mid-btn {
+  margin-right: 8px;
 }

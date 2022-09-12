@@ -18,6 +18,7 @@ class All extends Component {
               if (loading || !data) return "loading...";
 
               const { products } = data.category;
+
               return products.map((product) => (
                 <Card key={product.id} product={product} />
               ));
