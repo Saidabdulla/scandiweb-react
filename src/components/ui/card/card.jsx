@@ -4,47 +4,11 @@ import { Link } from "react-router-dom";
 import styles from "./card.module.css";
 
 class Card extends Component {
-  constructor({ product }) {
-    super();
-
-    this.state = {
-      product: product,
-      amount: 0,
-      symbol: "",
-    };
-  }
-
-  componentDidMount() {
-    // eslint-disable-next-line array-callback-return
-    this.state.product.prices.find((price) => {
-      if (price.currency.symbol === this.props.currency.value) {
-        return this.setState({
-          amount: price.amount,
-          symbol: price.currency.symbol,
-        });
-      }
-    });
-  }
-
-  componentDidUpdate(previousProps, previousState) {
-    if (previousProps.currency.value !== this.props.currency.value) {
-      // eslint-disable-next-line array-callback-return
-      this.state.product.prices.find((price) => {
-        if (price.currency.symbol === this.props.currency.value) {
-          return this.setState({
-            amount: price.amount,
-            symbol: price.currency.symbol,
-          });
-        }
-      });
-    }
-  }
-
   render() {
     return (
       <div
         className={`${styles.card} ${
-          !this.state.product.inStock ? styles["out-of-stock"] : ""
+          !this.props.product.inStock ? styles["out-of-stock"] : ""
         }`}
       >
         <Link
@@ -52,7 +16,7 @@ class Card extends Component {
           className={styles["card-link"]}
         >
           <div className={styles.container}>
-            {!this.state.product.inStock ? (
+            {!this.props.product.inStock ? (
               <div className={styles["stock-overlay"]}>
                 <span>OUT OF STOCK</span>
               </div>
@@ -60,16 +24,20 @@ class Card extends Component {
             <img
               loading="lazy"
               className={styles.img}
-              src={this.state.product.gallery[0]}
-              alt={this.state.product.name}
+              src={this.props.product.gallery[0]}
+              alt={this.props.product.name}
             />
           </div>
           <div className={styles.content}>
-            <div className={styles.name}>{this.state.product.name}</div>
+            <div className={styles.name}>{this.props.product.name}</div>
 
-            <div className={styles.price}>
-              {this.state.symbol} {this.state.amount}
-            </div>
+            {this.props.product.prices.map((price) => {
+              return this.props.currency.value === price.currency.symbol ? (
+                <div className={styles.price} key={price.currency.symbol}>
+                  {price.currency.symbol} {price.amount}
+                </div>
+              ) : null;
+            })}
           </div>
         </Link>
       </div>
