@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Query } from "@apollo/client/react/components";
 import { GET_PRODUCT_BY_ID } from "../../graphql/queries";
 import { withParams } from "../../utils/withParams";
@@ -107,7 +108,7 @@ class Product extends Component {
                 <div className={styles.brand}>{product.brand}</div>
                 <div className={styles.name}>{product.name}</div>
 
-                {console.log(this.state)}
+                {console.log(product)}
 
                 {product.attributes.map((att) => {
                   return (
@@ -156,6 +157,18 @@ class Product extends Component {
                     </div>
                   );
                 })}
+
+                <div className={styles["price-title"]}>PRICE: </div>
+                {product.prices.map((price) => {
+                  return this.props.currency.value === price.currency.symbol ? (
+                    <div
+                      key={price.currency.symbol}
+                      className={styles["price-amount"]}
+                    >
+                      {price.currency.symbol} {price.amount}
+                    </div>
+                  ) : null;
+                })}
               </div>
             </main>
           );
@@ -165,4 +178,8 @@ class Product extends Component {
   }
 }
 
-export default withParams(Product);
+const mapStateToProps = (state) => ({
+  currency: state.currency,
+});
+
+export default connect(mapStateToProps, {})(withParams(Product));
