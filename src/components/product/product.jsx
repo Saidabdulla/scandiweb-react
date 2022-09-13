@@ -108,6 +108,7 @@ class Product extends Component {
               <div className={styles.right}>
                 <div className={styles.brand}>{product.brand}</div>
                 <div className={styles.name}>{product.name}</div>
+
                 {console.log(product)}
                 {product.attributes.map((att) => {
                   return (
@@ -156,7 +157,9 @@ class Product extends Component {
                     </div>
                   );
                 })}
+
                 <div className={styles["price-title"]}>PRICE: </div>
+
                 {product.prices.map((price) => {
                   return this.props.currency.value === price.currency.symbol ? (
                     <div
