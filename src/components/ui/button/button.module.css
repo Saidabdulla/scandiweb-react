@@ -1,0 +1,11 @@
+.add-btn {
+  padding: 16px 93px;
+  width: 100%;
+  font-weight: 600;
+  text-align: center;
+  background-color: #5ece7b;
+  border: none;
+  cursor: pointer;
+  color: white;
+  letter-spacing: 1px;
+}

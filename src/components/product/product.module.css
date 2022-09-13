@@ -67,10 +67,7 @@
 
 .size-row {
   display: flex;
-}
-
-.size-row .big-btn {
-  margin-right: 12px;
+  gap: 12px;
 }
 
 .size-row .mid-btn {
@@ -82,11 +79,20 @@
   font-size: 18px;
   text-transform: uppercase;
   margin-top: 36px;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .price-amount {
   font-weight: 700;
   font-size: 24px;
   text-transform: uppercase;
+}
+
+.add-button {
+  margin-top: 32px;
+}
+
+.description {
+  margin-top: 40px;
+  max-width: 288px;
 }

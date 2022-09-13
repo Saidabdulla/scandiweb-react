@@ -6,6 +6,7 @@ import { withParams } from "../../utils/withParams";
 import SizeBtn from "../ui/size-btn/size";
 import styles from "./product.module.css";
 import Color from "../ui/color/color";
+import Button from "../ui/button/button";
 
 class Product extends Component {
   constructor() {
@@ -107,9 +108,7 @@ class Product extends Component {
               <div className={styles.right}>
                 <div className={styles.brand}>{product.brand}</div>
                 <div className={styles.name}>{product.name}</div>
-
                 {console.log(product)}
-
                 {product.attributes.map((att) => {
                   return (
                     <div className={styles.size} key={att.name}>
@@ -157,7 +156,6 @@ class Product extends Component {
                     </div>
                   );
                 })}
-
                 <div className={styles["price-title"]}>PRICE: </div>
                 {product.prices.map((price) => {
                   return this.props.currency.value === price.currency.symbol ? (
@@ -169,6 +167,17 @@ class Product extends Component {
                     </div>
                   ) : null;
                 })}
+
+                <div className={styles["add-button"]}>
+                  <Button isDisabled={!product.inStock} />
+                </div>
+
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: product.description,
+                  }}
+                  className={styles.description}
+                ></div>
               </div>
             </main>
           );
