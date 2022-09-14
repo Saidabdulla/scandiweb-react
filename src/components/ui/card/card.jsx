@@ -1,9 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { addToCard } from "../../../actions/cart-actions";
+
 import styles from "./card.module.css";
+import { ReactComponent as IconBasket } from "../../../assets/img/green_basket.svg";
 
 class Card extends Component {
+  onClickGreenBasket() {
+    const product = {
+      id: this.props.product.id,
+      item: {
+        name: this.props.product.name,
+        brand: this.props.product.brand,
+        prices: this.props.product.prices,
+        attributes: this.props.product.attributes,
+        gallery: this.props.product.gallery,
+      },
+    };
+
+    this.props.addToCard(product);
+  }
+
   render() {
     return (
       <div
@@ -21,6 +39,7 @@ class Card extends Component {
                 <span>OUT OF STOCK</span>
               </div>
             ) : null}
+
             <img
               loading="lazy"
               className={styles.img}
@@ -28,6 +47,7 @@ class Card extends Component {
               alt={this.props.product.name}
             />
           </div>
+
           <div className={styles.content}>
             <div className={styles.name}>{this.props.product.name}</div>
 
@@ -40,6 +60,14 @@ class Card extends Component {
             })}
           </div>
         </Link>
+
+        <button
+          style={!this.props.product.inStock ? { display: "none" } : null}
+          className={styles["add-to-card-btn"]}
+          onClick={() => this.onClickGreenBasket()}
+        >
+          <IconBasket />
+        </button>
       </div>
     );
   }
@@ -47,6 +75,7 @@ class Card extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currency,
+  cart: state.cart,
 });
 
-export default connect(mapStateToProps, {})(Card);
+export default connect(mapStateToProps, { addToCard })(Card);
