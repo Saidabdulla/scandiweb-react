@@ -3,16 +3,19 @@ import { Query } from "@apollo/client/react/components";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import Card from "../ui/card/card";
 
-import "./all.css";
+import "./main.css";
 
 class All extends Component {
   render() {
     return (
       <main className="wrapper">
-        <div className="title">All</div>
+        <div className="title">
+          {console.log(this.props)}
+          {this.props.page.charAt(0).toUpperCase() + this.props.page.slice(1)}
+        </div>
 
         <div className="products">
-          <Query query={GET_PRODUCTS} variables={{ title: "all" }}>
+          <Query query={GET_PRODUCTS} variables={{ title: this.props.page }}>
             {({ loading, error, data }) => {
               if (error) return error;
               if (loading || !data) return "loading...";
