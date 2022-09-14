@@ -4,6 +4,7 @@ import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
 import { changeCurrency } from "../../actions/currency-actions";
 import { GET_CATEGORIES, GET_CURRENCIES } from "../../graphql/queries";
+import Cart from "../ui/cart/cart";
 
 import styles from "./navbar.module.css";
 import { ReactComponent as IconLogo } from "../../assets/img/VSF.svg";
@@ -15,6 +16,7 @@ class Navbar extends Component {
 
     this.state = {
       showCurrencyModal: false,
+      showCartModal: false,
     };
   }
 
@@ -22,6 +24,13 @@ class Navbar extends Component {
   clickCurrencyHandler = (value) => {
     this.props.changeCurrency(value);
     this.setState({ showCurrencyModal: false });
+  };
+
+  clickCartBtnHandler = () => {
+    this.setState({ showCurrencyModal: false });
+    this.setState((prevState, props) => ({
+      showCartModal: !prevState.showCartModal,
+    }));
   };
 
   render() {
@@ -55,6 +64,7 @@ class Navbar extends Component {
               onClick={() =>
                 this.setState((prevState, props) => ({
                   showCurrencyModal: !prevState.showCurrencyModal,
+                  showCartModal: false,
                 }))
               }
             >
@@ -74,7 +84,11 @@ class Navbar extends Component {
                 />
               </svg>
             </button>
-            <button type="button" className={styles["cart-btn"]}>
+            <button
+              onClick={() => this.clickCartBtnHandler()}
+              type="button"
+              className={styles["cart-btn"]}
+            >
               <IconCart />
 
               <div
@@ -87,6 +101,7 @@ class Navbar extends Component {
               </div>
             </button>
 
+            <Cart isShow={this.state.showCartModal} />
             {/* show the modal conditionally */}
             {this.state.showCurrencyModal ? (
               <ul className={styles["currency-modal"]}>
