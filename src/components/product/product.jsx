@@ -4,7 +4,7 @@ import { Query } from "@apollo/client/react/components";
 import { GET_PRODUCT_BY_ID } from "../../graphql/queries";
 import { withParams } from "../../utils/withParams";
 import { sortProductAttrs } from "../../utils/sortAttributes";
-import Cart from "../ui/cart/cart";
+import Details from "../ui/details/details";
 import styles from "./product.module.css";
 
 class Product extends Component {
@@ -62,7 +62,7 @@ class Product extends Component {
                 </div>
               </div>
               <div className={styles.right}>
-                <Cart product={product} />
+                <Details product={product} id={this.state.id} />
               </div>
             </main>
           );

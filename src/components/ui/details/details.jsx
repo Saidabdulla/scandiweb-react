@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withParams } from "../../../utils/withParams";
+import _ from "lodash";
 import SizeBtn from "../size-btn/size";
 import Color from "../color/color";
 import Button from "../button/button";
-import styles from "./cart.module.css";
+import styles from "./details.module.css";
 
-class Cart extends Component {
+class Details extends Component {
   constructor() {
     super();
 
@@ -29,6 +30,49 @@ class Cart extends Component {
     const stateName = `selected${secondPart}`;
 
     return value === this.state[stateName];
+  }
+
+  addItemToCard() {
+    if (
+      Object.keys(this.state).length !== this.props.product.attributes.length
+    ) {
+      return alert("Please select all features! Color, size, capacity, etc...");
+    }
+
+    // quantity
+    const product = {
+      id: this.props.id,
+      quantity: 1,
+      item: {
+        ...this.state,
+        name: this.props.product.name,
+        brand: this.props.product.brand,
+        prices: this.props.product.prices,
+        attributes: this.props.product.attributes,
+        gallery: this.props.product.gallery,
+      },
+    };
+
+    let cart = JSON.parse(localStorage.getItem("cart"));
+
+    if (!cart) {
+      cart = [];
+      cart.push(product);
+      alert("Product added to your basket 🙂!");
+    } else {
+      const itemIndex = cart.findIndex((item) =>
+        _.isEqual(item.item, product.item)
+      );
+
+      if (itemIndex >= 0) {
+        alert("You already have this product in your basket 😊!");
+      } else {
+        cart.push(product);
+        alert("Product added to your basket 🙂!");
+      }
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 
   render() {
@@ -86,7 +130,10 @@ class Cart extends Component {
           ) : null;
         })}
 
-        <div className={styles["add-button"]}>
+        <div
+          className={styles["add-button"]}
+          onClick={() => this.addItemToCard()}
+        >
           <Button isDisabled={!this.props.product.inStock} />
         </div>
 
@@ -105,4 +152,4 @@ const mapStateToProps = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapStateToProps, {})(withParams(Cart));
+export default connect(mapStateToProps, {})(withParams(Details));

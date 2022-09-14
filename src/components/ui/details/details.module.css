@@ -56,3 +56,8 @@
 .description * {
   font-family: "Roboto", sans-serif;
 }
+
+/* cart styles */
+.cart {
+  display: flex;
+}
