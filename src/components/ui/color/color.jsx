@@ -14,7 +14,7 @@ class Color extends Component {
         <div
           style={
             this.props.color === "#FFFFFF"
-              ? { backgroundColor: "#f1f1f1" }
+              ? { backgroundColor: "#ededed" }
               : { backgroundColor: this.props.color }
           }
           className={styles.inner}
