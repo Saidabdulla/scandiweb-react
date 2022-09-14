@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.brand {
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+.name {
+  font-size: 30px;
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+.size-title {
+  margin-top: 24px;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  font-family: "Roboto", sans-serif;
+}
+
+.size-row {
+  display: flex;
+  gap: 12px;
+}
+
+.size-row .mid-btn {
+  margin-right: 8px;
+}
+
+.price-title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-top: 36px;
+  margin-bottom: 16px;
+}
+
+.price-amount {
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.add-button {
+  margin-top: 32px;
+}
+
+.description {
+  margin-top: 40px;
+  max-width: 288px;
+}
+.description * {
+  font-family: "Roboto", sans-serif;
+}
