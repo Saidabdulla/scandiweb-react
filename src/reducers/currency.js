@@ -9,8 +9,7 @@ export default function curencyReducer(state = initialState, action) {
     localStorage.setItem("currency", initialState.value);
 
     return { ...state };
-  }
-  if (action.payload === undefined && ls !== null) {
+  } else if (action.payload === undefined && ls !== null) {
     return { ...state, value: ls };
   } else return { ...state, value: action.payload };
 }

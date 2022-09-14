@@ -8,6 +8,7 @@ import { GET_CATEGORIES, GET_CURRENCIES } from "../../graphql/queries";
 import styles from "./navbar.module.css";
 import { ReactComponent as IconLogo } from "../../assets/img/VSF.svg";
 import { ReactComponent as IconCart } from "../../assets/img/empty_cart.svg";
+import { ReactComponent as IconCartCounter } from "../../assets/img/cart_counter.svg";
 
 class Navbar extends Component {
   constructor() {
@@ -15,6 +16,8 @@ class Navbar extends Component {
 
     this.state = {
       showCurrencyModal: false,
+      cart: [],
+      count: 0,
     };
   }
 
@@ -24,6 +27,22 @@ class Navbar extends Component {
     localStorage.setItem("currency", value);
     this.setState({ showCurrencyModal: false });
   };
+
+  // itemChangeHandler = () => {
+  //   const items = JSON.parse(localStorage.getItem("cart"));
+  //   this.setState({ cart: items, count: items.length });
+  // };
+
+  // componentDidMount() {
+  //   const ls = JSON.parse(localStorage.getItem("cart"));
+  //   if (!ls) {
+  //     localStorage.setItem("cart", JSON.stringify([]));
+  //   }
+
+  //   this.itemChangeHandler();
+
+  //   document.addEventListener("itemChanged", this.itemChangeHandler, false);
+  // }
 
   render() {
     return (
@@ -77,6 +96,16 @@ class Navbar extends Component {
             </button>
             <button type="button" className={styles["cart-btn"]}>
               <IconCart />
+              <IconCartCounter
+                style={!this.state.count ? { display: "none" } : null}
+                className={styles["counter-overlay"]}
+              />
+              <div
+                style={!this.state.count ? { display: "none" } : null}
+                className={styles.counter}
+              >
+                {this.state.cart.length}
+              </div>
             </button>
 
             {/* show the modal conditionally */}

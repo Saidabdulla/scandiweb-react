@@ -16,5 +16,20 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+
+    <script>
+      const originalSetItem = localStorage.setItem;
+
+      localStorage.setItem = function (key, value) {
+        const event = new Event("itemChanged");
+
+        event.value = value; // Optional..
+        event.key = key; // Optional..
+
+        document.dispatchEvent(event);
+
+        originalSetItem.apply(this, arguments);
+      };
+    </script>
   </body>
 </html>

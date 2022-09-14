@@ -37,6 +37,27 @@
   position: relative;
 }
 
+.cart-btn {
+  position: relative;
+}
+
+.counter-overlay {
+  z-index: -1;
+  position: absolute;
+  top: -4px;
+  right: -6px;
+}
+
+.counter {
+  color: white;
+  position: absolute;
+  top: -4px;
+  right: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 2;
+}
+
 .currency-btn,
 .cart-btn {
   background: none;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withParams } from "../../../utils/withParams";
+import { addToCard } from "../../../actions/cart-actions";
 import _ from "lodash";
 import SizeBtn from "../size-btn/size";
 import Color from "../color/color";
@@ -32,7 +32,7 @@ class Details extends Component {
     return value === this.state[stateName];
   }
 
-  addItemToCard() {
+  addItemToCard = () => {
     if (
       Object.keys(this.state).length !== this.props.product.attributes.length
     ) {
@@ -72,12 +72,15 @@ class Details extends Component {
       }
     }
 
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }
+    // localStorage.setItem("cart", JSON.stringify(cart));
+    console.log("detail component: ", cart);
+    this.props.addToCard(cart);
+  };
 
   render() {
     return (
       <>
+        {console.log(this.props)}
         <div className={styles.brand}>{this.props.product.brand}</div>
         <div className={styles.name}>{this.props.product.name}</div>
         {this.props.product.attributes.map((att) => {
@@ -150,6 +153,7 @@ class Details extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currency,
+  cart: state.cart,
 });
 
-export default connect(mapStateToProps, {})(withParams(Details));
+export default connect(mapStateToProps, { addToCard })(Details);
