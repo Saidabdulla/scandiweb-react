@@ -8,7 +8,6 @@ import { GET_CATEGORIES, GET_CURRENCIES } from "../../graphql/queries";
 import styles from "./navbar.module.css";
 import { ReactComponent as IconLogo } from "../../assets/img/VSF.svg";
 import { ReactComponent as IconCart } from "../../assets/img/empty_cart.svg";
-import { ReactComponent as IconCartCounter } from "../../assets/img/cart_counter.svg";
 
 class Navbar extends Component {
   constructor() {
@@ -16,33 +15,14 @@ class Navbar extends Component {
 
     this.state = {
       showCurrencyModal: false,
-      cart: [],
-      count: 0,
     };
   }
 
-  // updates store & localstorage and closes currency modal
+  // updates store and closes currency modal
   clickCurrencyHandler = (value) => {
     this.props.changeCurrency(value);
-    localStorage.setItem("currency", value);
     this.setState({ showCurrencyModal: false });
   };
-
-  // itemChangeHandler = () => {
-  //   const items = JSON.parse(localStorage.getItem("cart"));
-  //   this.setState({ cart: items, count: items.length });
-  // };
-
-  // componentDidMount() {
-  //   const ls = JSON.parse(localStorage.getItem("cart"));
-  //   if (!ls) {
-  //     localStorage.setItem("cart", JSON.stringify([]));
-  //   }
-
-  //   this.itemChangeHandler();
-
-  //   document.addEventListener("itemChanged", this.itemChangeHandler, false);
-  // }
 
   render() {
     return (
@@ -96,15 +76,14 @@ class Navbar extends Component {
             </button>
             <button type="button" className={styles["cart-btn"]}>
               <IconCart />
-              <IconCartCounter
-                style={!this.state.count ? { display: "none" } : null}
-                className={styles["counter-overlay"]}
-              />
+
               <div
-                style={!this.state.count ? { display: "none" } : null}
+                style={
+                  !this.props.cart.items.length ? { display: "none" } : null
+                }
                 className={styles.counter}
               >
-                {this.state.cart.length}
+                {this.props.cart.items.length}
               </div>
             </button>
 
@@ -121,7 +100,7 @@ class Navbar extends Component {
                       <li
                         onClick={() => this.clickCurrencyHandler(cy.symbol)}
                         className={
-                          cy.symbol === localStorage.getItem("currency")
+                          cy.symbol === this.props.currency.value
                             ? "currency-active"
                             : ""
                         }
@@ -145,6 +124,7 @@ class Navbar extends Component {
 
 const mapStateToProps = (state) => ({
   currency: state.currency,
+  cart: state.cart,
 });
 
 export default connect(mapStateToProps, { changeCurrency })(Navbar);

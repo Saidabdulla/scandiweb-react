@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addToCard } from "../../../actions/cart-actions";
-import _ from "lodash";
 import SizeBtn from "../size-btn/size";
 import Color from "../color/color";
 import Button from "../button/button";
@@ -39,7 +38,6 @@ class Details extends Component {
       return alert("Please select all features! Color, size, capacity, etc...");
     }
 
-    // quantity
     const product = {
       id: this.props.id,
       quantity: 1,
@@ -53,34 +51,13 @@ class Details extends Component {
       },
     };
 
-    let cart = JSON.parse(localStorage.getItem("cart"));
-
-    if (!cart) {
-      cart = [];
-      cart.push(product);
-      alert("Product added to your basket 🙂!");
-    } else {
-      const itemIndex = cart.findIndex((item) =>
-        _.isEqual(item.item, product.item)
-      );
-
-      if (itemIndex >= 0) {
-        alert("You already have this product in your basket 😊!");
-      } else {
-        cart.push(product);
-        alert("Product added to your basket 🙂!");
-      }
-    }
-
-    // localStorage.setItem("cart", JSON.stringify(cart));
-    console.log("detail component: ", cart);
-    this.props.addToCard(cart);
+    this.props.addToCard(product);
   };
 
   render() {
     return (
       <>
-        {console.log(this.props)}
+        {console.log(this.props.cart)}
         <div className={styles.brand}>{this.props.product.brand}</div>
         <div className={styles.name}>{this.props.product.name}</div>
         {this.props.product.attributes.map((att) => {

@@ -51,8 +51,15 @@
 .counter {
   color: white;
   position: absolute;
+  background-color: #1d1f22;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
   top: -4px;
-  right: 1px;
+  right: -6px;
   font-size: 14px;
   font-weight: 600;
   z-index: 2;

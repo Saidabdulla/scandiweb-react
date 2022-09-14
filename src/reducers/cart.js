@@ -1,22 +1,21 @@
-const cart = {};
+import _ from "lodash";
+import { CHANGE_CART } from "../actions/types";
+
+const cart = {
+  items: [],
+};
 
 export default function cartReducer(state = cart, action) {
-  console.log("Reducer: ", action.payload);
+  if (action.type === CHANGE_CART) {
+    const itemIndex = state.items.findIndex((item) =>
+      _.isEqual(item.item, action.payload.item)
+    );
 
-  if (action.payload) {
-    return { ...state, items: [...state.items, action.payload] };
+    if (itemIndex >= 0) {
+      alert("You already have this product in your basket 😊!");
+      return state;
+    } else {
+      return { ...state, items: [...state.items, action.payload] };
+    }
   } else return state;
 }
-
-// const ls = JSON.parse(localStorage.getItem("cart"));
-
-// if (ls === null && action.payload === undefined) {
-//   localStorage.setItem("cart", JSON.stringify(cart));
-
-//   return [...state];
-// } else if (action.payload === undefined && ls !== null) {
-//   return [...state, ...ls];
-// } else {
-//   console.log([...state, ...action.payload]);
-//   return [...state, ...action.payload];
-// }
