@@ -73,6 +73,7 @@ class Details extends Component {
                       onClick={() => this.setSelectedAttr(att.name, item.value)}
                     >
                       <SizeBtn
+                        big={true}
                         active={this.checkActiveOrnot(att.name, item.value)}
                         text={item.value}
                       />
@@ -86,6 +87,7 @@ class Details extends Component {
                       }
                     >
                       <Color
+                        big={true}
                         active={this.checkActiveOrnot(
                           att.name,
                           item.displayValue

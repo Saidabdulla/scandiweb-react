@@ -1,5 +1,11 @@
-.inner {
+.big {
   width: 32px;
   height: 32px;
+  cursor: pointer;
+}
+
+.little {
+  width: 16px;
+  height: 16px;
   cursor: pointer;
 }

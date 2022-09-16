@@ -17,7 +17,7 @@ class Color extends Component {
               ? { backgroundColor: "#ededed" }
               : { backgroundColor: this.props.color }
           }
-          className={styles.inner}
+          className={this.props.big ? styles.big : styles.little}
         ></div>
       </div>
     );

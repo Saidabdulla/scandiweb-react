@@ -1,4 +1,5 @@
-.size-card {
+.little,
+.big {
   width: 63px;
   height: 45px;
   display: flex;
@@ -8,4 +9,10 @@
   border: 1px solid black;
   color: black;
   cursor: pointer;
+}
+
+.little {
+  width: 24px;
+  padding: 0 8px;
+  height: 24px;
 }

@@ -49,7 +49,12 @@ class Cart extends Component {
 
         <div className={styles.actions}>
           <button className={styles.view}>View bag</button>
-          <button className={styles.check}>CHECK OUT</button>
+          <button
+            onClick={() => alert("Thank you for shopping with us!")}
+            className={styles.check}
+          >
+            CHECK OUT
+          </button>
         </div>
       </div>
     );

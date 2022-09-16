@@ -10,7 +10,7 @@ class Size extends Component {
             ? { backgroundColor: "black", color: "white" }
             : null
         }
-        className={styles["size-card"]}
+        className={this.props.big ? styles.big : styles.little}
       >
         {this.props.text}
       </div>
