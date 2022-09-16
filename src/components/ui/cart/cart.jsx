@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+
 import CartItem from "../cart-item/cart-item";
 
 import styles from "./cart.module.css";
@@ -34,7 +36,6 @@ class Cart extends Component {
           <span> My Bag, </span>
           {this.props.cart.items.length} items.
         </div>
-        {console.log(this.props)}
 
         {this.props.cart.items.map((item) => (
           <CartItem key={item.id + Math.random()} item={item} />
@@ -48,7 +49,9 @@ class Cart extends Component {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.view}>View bag</button>
+          <button className={styles.view}>
+            <Link to="/cart">View bag</Link>
+          </button>
           <button
             onClick={() => alert("Thank you for shopping with us!")}
             className={styles.check}

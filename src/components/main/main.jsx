@@ -10,7 +10,6 @@ class All extends Component {
     return (
       <main className="wrapper">
         <div className="title">
-          {console.log(this.props)}
           {this.props.page.charAt(0).toUpperCase() + this.props.page.slice(1)}
         </div>
 

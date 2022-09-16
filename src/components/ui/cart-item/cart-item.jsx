@@ -27,10 +27,6 @@ class CartItem extends Component {
   // }
 
   render() {
-    {
-      console.log(this.props.item);
-    }
-
     return this.props.item.quantity > 0 ? (
       <div className={styles.item}>
         <div className={styles.left}>
