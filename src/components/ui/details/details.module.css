@@ -24,10 +24,11 @@
 .size-row {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
-.size-row .mid-btn {
-  margin-right: 8px;
+.color-row {
+  gap: 8px;
 }
 
 .price-title {

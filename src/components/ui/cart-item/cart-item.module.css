@@ -25,6 +25,8 @@
 .mini .size-row {
   display: flex;
   gap: 8px;
+  align-items: center;
+  row-gap: 10px;
 }
 
 .mini .size-title {
@@ -103,7 +105,9 @@
 
 .full .size-row {
   display: flex;
+  align-items: center;
   gap: 8px;
+  row-gap: 10px;
 }
 
 .full .left {
@@ -147,5 +151,3 @@
   object-fit: cover;
   object-position: top center;
 }
-
-/* swiper */

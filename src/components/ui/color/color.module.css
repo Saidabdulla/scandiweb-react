@@ -9,3 +9,10 @@
   height: 16px;
   cursor: pointer;
 }
+.active {
+  border: "1px solid #5ECE7B";
+}
+
+.active div {
+  margin: 1px;
+}

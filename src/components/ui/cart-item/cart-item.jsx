@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import _ from "lodash";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -8,27 +9,32 @@ import SizeBtn from "../size-btn/size";
 import Color from "../color/color";
 import { ReactComponent as IconPlus } from "../../../assets/img/plus-square.svg";
 import { ReactComponent as IconMinus } from "../../../assets/img/minus.svg";
+import { editActiveAttribute } from "../../../actions/cart-actions";
 
 import styles from "./cart-item.module.css";
 
 class CartItem extends Component {
-  // setSelectedAttr(name, value) {
-  //   const newState = {};
-  //   let str = name.replaceAll(" ", "");
-  //   let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
-  //   newState[`selected${secondPart}`] = value;
+  setSelectedAttr(name, value) {
+    let str = name.replaceAll(" ", "");
+    let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
+    const stateName = `selected${secondPart}`;
 
-  //   this.setState(newState);
-  // }
+    const prevObject = _.cloneDeep(this.props.item);
+    const nextObject = _.cloneDeep(this.props.item);
 
-  // checkActiveOrnot(name, value) {
-  //   let str = name.replaceAll(" ", "");
-  //   let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
+    nextObject.item[stateName] = value;
 
-  //   const stateName = `selected${secondPart}`;
+    this.props.editActiveAttribute([prevObject, nextObject]);
+  }
 
-  //   return value === this.state[stateName];
-  // }
+  checkActiveOrnot(name, value) {
+    let str = name.replaceAll(" ", "");
+    let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
+
+    const stateName = `selected${secondPart}`;
+
+    return value === this.props.item.item[stateName];
+  }
 
   render() {
     return this.props.item.quantity > 0 ? (
@@ -65,13 +71,13 @@ class CartItem extends Component {
                         <div
                           className={styles["big-btn"]}
                           key={item.value}
-                          // onClick={() =>
-                          //   this.setSelectedAttr(att.name, item.value)
-                          // }
+                          onClick={() =>
+                            this.setSelectedAttr(att.name, item.value)
+                          }
                         >
                           <SizeBtn
                             big={this.props.big}
-                            // active={this.checkActiveOrnot(att.name, item.value)}
+                            active={this.checkActiveOrnot(att.name, item.value)}
                             text={item.value}
                           />
                         </div>
@@ -85,10 +91,10 @@ class CartItem extends Component {
                         >
                           <Color
                             big={this.props.big}
-                            // active={this.checkActiveOrnot(
-                            //   att.name,
-                            //   item.displayValue
-                            // )}
+                            active={this.checkActiveOrnot(
+                              att.name,
+                              item.displayValue
+                            )}
                             color={item.value}
                           />
                         </div>
@@ -136,4 +142,4 @@ const mapStateToProps = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapStateToProps, {})(CartItem);
+export default connect(mapStateToProps, { editActiveAttribute })(CartItem);

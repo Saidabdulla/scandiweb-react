@@ -64,7 +64,13 @@ class Details extends Component {
           return (
             <div className={styles.size} key={att.name}>
               <div className={styles["size-title"]}>{att.name}: </div>
-              <div className={styles["size-row"]}>
+              <div
+                className={`${
+                  att.name.toLowerCase() === "color"
+                    ? styles["color-row"]
+                    : null
+                } ${styles["size-row"]}`}
+              >
                 {att.items.map((item) =>
                   att.name.toLowerCase() !== "color" ? (
                     <div

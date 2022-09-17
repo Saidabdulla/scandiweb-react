@@ -7,9 +7,10 @@ class Color extends Component {
       <div
         style={
           this.props.active
-            ? { padding: "1px", border: "1px solid #5ECE7B" }
+            ? { margin: "1px", border: "1px solid #5ECE7B" }
             : null
         }
+        className={this.props.active ? styles.active : null}
       >
         <div
           style={

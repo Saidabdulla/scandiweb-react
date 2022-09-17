@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { CHANGE_CART } from "../actions/types";
+import { CHANGE_CART, EDIT_ACTIVE_ATTRIBUTE } from "../actions/types";
 
 const cart = {
   items: [],
@@ -17,5 +17,13 @@ export default function cartReducer(state = cart, action) {
     } else {
       return { ...state, items: [...state.items, action.payload] };
     }
+  } else if (action.type === EDIT_ACTIVE_ATTRIBUTE) {
+    const itemIndex = state.items.findIndex((item) =>
+      _.isEqual(item, action.payload[0])
+    );
+
+    state.items[itemIndex] = action.payload[1];
+
+    return { ...state };
   } else return state;
 }
