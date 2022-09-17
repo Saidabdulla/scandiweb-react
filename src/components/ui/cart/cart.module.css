@@ -64,11 +64,19 @@
 .view {
   border: 1px solid black;
   background-color: white;
-}
-
-.view a {
   text-decoration: none;
   color: black;
+}
+
+.view button {
+  cursor: pointer;
+  background: none;
+  color: black;
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .check {

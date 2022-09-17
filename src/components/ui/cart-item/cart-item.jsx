@@ -28,9 +28,17 @@ class CartItem extends Component {
 
   render() {
     return this.props.item.quantity > 0 ? (
-      <div className={styles.item}>
+      <div
+        className={`${styles.item} ${
+          this.props.big ? styles.full : styles.mini
+        }`}
+      >
         <div className={styles.left}>
           <div className={styles.details}>
+            {this.props.big ? (
+              <div className={styles.brand}>{this.props.item.item.brand}</div>
+            ) : null}
+
             <div className={styles.title}>{this.props.item.item.name}</div>
 
             <div className={styles.price}>
@@ -58,7 +66,7 @@ class CartItem extends Component {
                           // }
                         >
                           <SizeBtn
-                            big={false}
+                            big={this.props.big}
                             // active={this.checkActiveOrnot(att.name, item.value)}
                             text={item.value}
                           />
@@ -72,7 +80,7 @@ class CartItem extends Component {
                           // }
                         >
                           <Color
-                            big={false}
+                            big={this.props.big}
                             // active={this.checkActiveOrnot(
                             //   att.name,
                             //   item.displayValue
@@ -96,6 +104,7 @@ class CartItem extends Component {
         <div className={styles.right}>
           <div className={styles.image}>
             <img
+              loading="lazy"
               src={this.props.item.item.gallery[0]}
               alt={this.props.item.item.gallery[0]}
             />

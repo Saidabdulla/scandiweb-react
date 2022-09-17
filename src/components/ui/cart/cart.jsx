@@ -38,7 +38,7 @@ class Cart extends Component {
         </div>
 
         {this.props.cart.items.map((item) => (
-          <CartItem key={item.id + Math.random()} item={item} />
+          <CartItem big={false} key={item.id + Math.random()} item={item} />
         ))}
 
         <div className={styles.total}>
@@ -49,9 +49,10 @@ class Cart extends Component {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.view}>
-            <Link to="/cart">View bag</Link>
-          </button>
+          <Link className={styles.view} to="/cart">
+            <button>View bag</button>
+          </Link>
+
           <button
             onClick={() => alert("Thank you for shopping with us!")}
             className={styles.check}
