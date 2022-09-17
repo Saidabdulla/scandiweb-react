@@ -26,3 +26,31 @@ html {
 .currency-active {
   background: #eeeeee;
 }
+
+.swiper-button-prev {
+  color: white;
+  left: initial;
+  bottom: initial;
+  right: initial;
+  top: initial;
+  bottom: 16px;
+  right: 56px;
+  background: rgba(0, 0, 0, 0.73);
+  --swiper-navigation-size: 18px;
+  padding: 6px 10px;
+  box-sizing: content-box;
+}
+
+.swiper-button-next {
+  color: white;
+  left: initial;
+  bottom: initial;
+  right: initial;
+  top: initial;
+  bottom: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.73);
+  --swiper-navigation-size: 18px;
+  padding: 6px 10px;
+  box-sizing: content-box;
+}

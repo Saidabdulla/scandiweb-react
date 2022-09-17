@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 import SizeBtn from "../size-btn/size";
 import Color from "../color/color";
 import { ReactComponent as IconPlus } from "../../../assets/img/plus-square.svg";
@@ -102,13 +106,25 @@ class CartItem extends Component {
           </div>
         </div>
         <div className={styles.right}>
-          <div className={styles.image}>
-            <img
-              loading="lazy"
-              src={this.props.item.item.gallery[0]}
-              alt={this.props.item.item.gallery[0]}
-            />
-          </div>
+          {this.props.big ? (
+            <Swiper modules={[Navigation]} slidesPerView={1} navigation>
+              {this.props.item.item.gallery.map((img) => (
+                <SwiperSlide key={img + Math.random()}>
+                  <div className={styles.image}>
+                    <img loading="lazy" src={img} alt={img} />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className={styles.image}>
+              <img
+                loading="lazy"
+                src={this.props.item.item.gallery[0]}
+                alt={this.props.item.item.gallery[0]}
+              />
+            </div>
+          )}
         </div>
       </div>
     ) : null;
