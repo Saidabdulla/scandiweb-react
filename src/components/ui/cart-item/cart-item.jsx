@@ -9,7 +9,11 @@ import SizeBtn from "../size-btn/size";
 import Color from "../color/color";
 import { ReactComponent as IconPlus } from "../../../assets/img/plus-square.svg";
 import { ReactComponent as IconMinus } from "../../../assets/img/minus.svg";
-import { editActiveAttribute } from "../../../actions/cart-actions";
+import {
+  editActiveAttribute,
+  increaseQuantity,
+  decreaseQuantity,
+} from "../../../actions/cart-actions";
 
 import styles from "./cart-item.module.css";
 
@@ -34,6 +38,14 @@ class CartItem extends Component {
     const stateName = `selected${secondPart}`;
 
     return value === this.props.item.item[stateName];
+  }
+
+  increaseQuantityOnClick() {
+    this.props.increaseQuantity(this.props.item);
+  }
+
+  decreaseQuantityOnClick() {
+    this.props.decreaseQuantity(this.props.item);
   }
 
   render() {
@@ -85,9 +97,9 @@ class CartItem extends Component {
                         <div
                           className={styles["mid-btn"]}
                           key={item.value}
-                          // onClick={() =>
-                          //   this.setSelectedAttr(att.name, item.displayValue)
-                          // }
+                          onClick={() =>
+                            this.setSelectedAttr(att.name, item.displayValue)
+                          }
                         >
                           <Color
                             big={this.props.big}
@@ -106,9 +118,9 @@ class CartItem extends Component {
             })}
           </div>
           <div className={styles.actions}>
-            <IconPlus />
+            <IconPlus onClick={() => this.increaseQuantityOnClick()} />
             <div>{this.props.item.quantity}</div>
-            <IconMinus />
+            <IconMinus onClick={() => this.decreaseQuantityOnClick()} />
           </div>
         </div>
         <div className={styles.right}>
@@ -142,4 +154,8 @@ const mapStateToProps = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapStateToProps, { editActiveAttribute })(CartItem);
+export default connect(mapStateToProps, {
+  editActiveAttribute,
+  increaseQuantity,
+  decreaseQuantity,
+})(CartItem);

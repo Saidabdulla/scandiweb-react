@@ -32,6 +32,7 @@
 .mini .size-title {
   margin: 8px 0;
   font-size: 14px;
+  user-select: none;
 }
 
 .mini .actions {
@@ -44,6 +45,7 @@
 
 .mini .actions div {
   font-weight: bold;
+  user-select: none;
 }
 
 .mini .actions svg {
@@ -52,6 +54,7 @@
 
 .mini .right {
   width: 120px;
+  user-select: none;
 }
 
 .mini .right .image {
