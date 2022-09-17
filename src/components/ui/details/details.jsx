@@ -57,7 +57,6 @@ class Details extends Component {
   render() {
     return (
       <>
-        {console.log(this.props.cart)}
         <div className={styles.brand}>{this.props.product.brand}</div>
         <div className={styles.name}>{this.props.product.name}</div>
         {this.props.product.attributes.map((att) => {

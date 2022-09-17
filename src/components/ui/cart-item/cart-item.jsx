@@ -81,7 +81,11 @@ class CartItem extends Component {
                     {att.items.map((item) =>
                       att.name.toLowerCase() !== "color" ? (
                         <div
-                          className={styles["big-btn"]}
+                          className={`${styles["big-btn"]} ${
+                            att.name.toLowerCase() === "capacity"
+                              ? styles["capacity-btn"]
+                              : null
+                          }`}
                           key={item.value}
                           onClick={() =>
                             this.setSelectedAttr(att.name, item.value)

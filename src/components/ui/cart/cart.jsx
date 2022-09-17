@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { overlayToggle } from "../../../actions/modal-actions";
 
 import CartItem from "../cart-item/cart-item";
 
@@ -50,11 +51,16 @@ class Cart extends Component {
 
         <div className={styles.actions}>
           <Link className={styles.view} to="/cart">
-            <button>View bag</button>
+            <button onClick={() => this.props.overlayToggle(false)}>
+              View bag
+            </button>
           </Link>
 
           <button
-            onClick={() => alert("Thank you for shopping with us!")}
+            onClick={() => {
+              alert("Thank you for shopping with us!");
+              this.props.overlayToggle(false);
+            }}
             className={styles.check}
           >
             CHECK OUT
@@ -70,4 +76,4 @@ const mapStateToProps = (state) => ({
   currency: state.currency,
 });
 
-export default connect(mapStateToProps, {})(Cart);
+export default connect(mapStateToProps, { overlayToggle })(Cart);

@@ -29,6 +29,10 @@
   row-gap: 10px;
 }
 
+.mini .capacity-btn div {
+  width: initial;
+}
+
 .mini .size-title {
   margin: 8px 0;
   font-size: 14px;

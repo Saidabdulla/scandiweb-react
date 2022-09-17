@@ -1,0 +1,14 @@
+.info {
+  font-size: 24px;
+  display: flex;
+  margin-top: 32px;
+}
+
+.info .quantity {
+  margin-bottom: 8px;
+}
+
+.info .quantity span {
+  font-weight: bold;
+  margin-left: 10px;
+}

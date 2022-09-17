@@ -3,6 +3,7 @@ import { Outlet, NavLink, Link } from "react-router-dom";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
 import { changeCurrency } from "../../actions/currency-actions";
+import { overlayToggle } from "../../actions/modal-actions.js";
 import { GET_CATEGORIES, GET_CURRENCIES } from "../../graphql/queries";
 import Cart from "../ui/cart/cart";
 
@@ -16,7 +17,6 @@ class Navbar extends Component {
 
     this.state = {
       showCurrencyModal: false,
-      showCartModal: false,
     };
   }
 
@@ -26,11 +26,10 @@ class Navbar extends Component {
     this.setState({ showCurrencyModal: false });
   };
 
-  clickCartBtnHandler = () => {
+  clickCartBtnHandler = (value) => {
     this.setState({ showCurrencyModal: false });
-    this.setState((prevState, props) => ({
-      showCartModal: !prevState.showCartModal,
-    }));
+
+    this.props.overlayToggle(value);
   };
 
   render() {
@@ -45,7 +44,12 @@ class Navbar extends Component {
 
                 const { categories } = data;
                 return categories.map((cat) => (
-                  <NavLink key={cat.name} className={styles.link} to={cat.name}>
+                  <NavLink
+                    onClick={() => this.props.overlayToggle(false)}
+                    key={cat.name}
+                    className={styles.link}
+                    to={cat.name}
+                  >
                     {cat.name}
                   </NavLink>
                 ));
@@ -54,19 +58,20 @@ class Navbar extends Component {
           </ul>
 
           <Link className={styles.logo} to="/all">
-            <IconLogo />
+            <IconLogo onClick={() => this.props.overlayToggle(false)} />
           </Link>
 
           <div className={styles.right}>
             <button
               type="button"
               className={styles["currency-btn"]}
-              onClick={() =>
+              onClick={() => {
                 this.setState((prevState, props) => ({
                   showCurrencyModal: !prevState.showCurrencyModal,
-                  showCartModal: false,
-                }))
-              }
+                }));
+
+                this.props.overlayToggle(false);
+              }}
             >
               <div>{this.props.currency.value}</div>
               <svg
@@ -85,7 +90,9 @@ class Navbar extends Component {
               </svg>
             </button>
             <button
-              onClick={() => this.clickCartBtnHandler()}
+              onClick={() =>
+                this.clickCartBtnHandler(!this.props.overlay.value)
+              }
               type="button"
               className={styles["cart-btn"]}
             >
@@ -101,7 +108,7 @@ class Navbar extends Component {
               </div>
             </button>
 
-            <Cart isShow={this.state.showCartModal} />
+            <Cart isShow={this.props.overlay.value} />
             {/* show the modal conditionally */}
             {this.state.showCurrencyModal ? (
               <ul className={styles["currency-modal"]}>
@@ -130,7 +137,6 @@ class Navbar extends Component {
             ) : null}
           </div>
         </div>
-
         <Outlet />
       </>
     );
@@ -140,6 +146,9 @@ class Navbar extends Component {
 const mapStateToProps = (state) => ({
   currency: state.currency,
   cart: state.cart,
+  overlay: state.overlay,
 });
 
-export default connect(mapStateToProps, { changeCurrency })(Navbar);
+export default connect(mapStateToProps, { changeCurrency, overlayToggle })(
+  Navbar
+);

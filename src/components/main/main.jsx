@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Query } from "@apollo/client/react/components";
+import { connect } from "react-redux";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import Card from "../ui/card/card";
 
@@ -32,4 +33,8 @@ class All extends Component {
   }
 }
 
-export default All;
+const mapStateToProps = (state) => ({
+  overlay: state.overlay,
+});
+
+export default connect(mapStateToProps, {})(All);
