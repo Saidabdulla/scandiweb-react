@@ -10,6 +10,7 @@ class Card extends Component {
   onClickGreenBasket() {
     const product = {
       id: this.props.product.id,
+      quantity: 1,
       item: {
         name: this.props.product.name,
         brand: this.props.product.brand,

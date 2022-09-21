@@ -20,6 +20,7 @@ export default function cartReducer(state = cart, action) {
       alert("You already have this product in your basket 😊!");
       return state;
     } else {
+      alert("Product added to your basket! 🙂");
       return { ...state, items: [...state.items, action.payload] };
     }
   } else if (action.type === EDIT_ACTIVE_ATTRIBUTE) {
@@ -34,8 +35,6 @@ export default function cartReducer(state = cart, action) {
     const itemIndex = state.items.findIndex((item) =>
       _.isEqual(item, action.payload)
     );
-
-    console.log(itemIndex);
 
     state.items[itemIndex].quantity += 1;
 

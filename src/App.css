@@ -55,11 +55,7 @@ html {
   box-sizing: content-box;
 }
 
-html:has(.overlay-active) {
-  overflow: hidden;
-}
-
-.overlay-active {
+/* .overlay-active {
   position: absolute;
   z-index: 10;
   width: 100%;
@@ -68,9 +64,8 @@ html:has(.overlay-active) {
   top: 80px;
   bottom: 0;
   left: 0;
-  background: rgba(57, 55, 72, 0.22);
 }
 
 .overlay {
   display: none;
-}
+} */
