@@ -54,7 +54,7 @@ class Cart extends Component {
         <div className={styles.actions}>
           <Link className={styles.view} to="/cart">
             <button onClick={() => this.props.overlayToggle(false)}>
-              View bag
+              VIEW BAG
             </button>
           </Link>
 

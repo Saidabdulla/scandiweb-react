@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import parse from "html-react-parser";
 import { connect } from "react-redux";
 import { addToCard } from "../../../actions/cart-actions";
+import { toast } from "react-toastify";
 import SizeBtn from "../size-btn/size";
 import Color from "../color/color";
 import Button from "../button/button";
@@ -36,7 +37,9 @@ class Details extends Component {
     if (
       Object.keys(this.state).length !== this.props.product.attributes.length
     ) {
-      return alert("Please select all features! Color, size, capacity, etc...");
+      return toast.warn(
+        "Please select all features! Color, size, capacity, etc..."
+      );
     }
 
     const product = {

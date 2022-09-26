@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import {
   CHANGE_CART,
   DECREASE_QUANTITY,
