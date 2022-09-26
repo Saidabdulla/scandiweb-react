@@ -61,7 +61,7 @@ class CartView extends Component {
           <div className={styles.info}>
             <div>
               <div className={styles.quantity}>
-                Tax {this.totalQuantity() > 0 ? "21%" : "0"}:
+                Tax {this.totalQuantity() > 0 ? "21%" : "0%"}:
               </div>
 
               <div className={styles.quantity}>Quantity:</div>

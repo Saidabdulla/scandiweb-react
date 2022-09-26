@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import parse from "html-react-parser";
 import { connect } from "react-redux";
 import { addToCard } from "../../../actions/cart-actions";
 import SizeBtn from "../size-btn/size";
@@ -124,12 +125,9 @@ class Details extends Component {
           <Button isDisabled={!this.props.product.inStock} />
         </div>
 
-        <div
-          dangerouslySetInnerHTML={{
-            __html: this.props.product.description,
-          }}
-          className={styles.description}
-        ></div>
+        <div className={styles.description}>
+          {parse(this.props.product.description)}
+        </div>
       </>
     );
   }

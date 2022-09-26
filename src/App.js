@@ -7,12 +7,15 @@ import Navbar from "./components/navbar/navbar";
 import Main from "./components/main/main";
 import Product from "./components/product/product";
 import CartView from "./components/cart-view/cart-view";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <ToastContainer />
         <div
           className={this.props.overlay.value ? "overlay-active" : "overlay"}
         ></div>

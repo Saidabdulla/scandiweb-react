@@ -1,4 +1,5 @@
 import _ from "lodash";
+import { ToastContainer, toast } from "react-toastify";
 import {
   CHANGE_CART,
   DECREASE_QUANTITY,
@@ -17,10 +18,11 @@ export default function cartReducer(state = cart, action) {
     );
 
     if (itemIndex >= 0) {
-      alert("You already have this product in your basket 😊!");
+      state.items[itemIndex].quantity += 1;
+      toast.info("Product added!");
       return state;
     } else {
-      alert("Product added to your basket! 🙂");
+      toast.info("Product added!");
       return { ...state, items: [...state.items, action.payload] };
     }
   } else if (action.type === EDIT_ACTIVE_ATTRIBUTE) {
@@ -48,6 +50,7 @@ export default function cartReducer(state = cart, action) {
 
     if (state.items[itemIndex].quantity <= 0) {
       state.items.splice(itemIndex, 1);
+      toast.error("Product deleted!");
     }
 
     return { ...state };
