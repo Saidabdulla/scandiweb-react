@@ -32,10 +32,12 @@ class Cart extends Component {
       <div
         style={!this.props.isShow ? { display: "none" } : null}
         className={styles.cart}
+        onClick={(e) => e.stopPropagation()}
       >
         <div className={styles.title}>
           <span> My Bag, </span>
-          {this.props.cart.items.length} items.
+          {this.props.cart.items.length}{" "}
+          {this.props.cart.items.length <= 1 ? "item" : "items"}.
         </div>
 
         {this.props.cart.items.map((item) => (

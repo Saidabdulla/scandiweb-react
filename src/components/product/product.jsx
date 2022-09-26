@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Query } from "@apollo/client/react/components";
+import { overlayToggle } from "../../actions/modal-actions.js";
 import { GET_PRODUCT_BY_ID } from "../../graphql/queries";
 import { withParams } from "../../utils/withParams";
 import { sortProductAttrs } from "../../utils/sortAttributes";
@@ -24,7 +25,10 @@ class Product extends Component {
 
   render() {
     return (
-      <div className={styles["pdp-wrapper"]}>
+      <div
+        className={styles["pdp-wrapper"]}
+        onClick={() => this.props.overlayToggle(false)}
+      >
         <div
           className={styles["pdp-wrapper-overlay"]}
           style={
@@ -88,4 +92,4 @@ const mapStateToProps = (state) => ({
   overlay: state.overlay,
 });
 
-export default connect(mapStateToProps, {})(withParams(Product));
+export default connect(mapStateToProps, { overlayToggle })(withParams(Product));

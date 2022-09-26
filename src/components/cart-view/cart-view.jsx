@@ -60,7 +60,9 @@ class CartView extends Component {
 
           <div className={styles.info}>
             <div>
-              <div className={styles.quantity}>Tax 21%:</div>
+              <div className={styles.quantity}>
+                Tax {this.totalQuantity() > 0 ? "21%" : "0"}:
+              </div>
 
               <div className={styles.quantity}>Quantity:</div>
 
@@ -68,7 +70,7 @@ class CartView extends Component {
             </div>
             <div>
               <div className={styles.quantity}>
-                <span>$42.00</span>
+                <span>{this.totalQuantity() > 0 ? "$42.00" : "0"}</span>
               </div>
 
               <div className={styles.quantity}>
