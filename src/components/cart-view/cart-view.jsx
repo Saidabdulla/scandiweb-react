@@ -38,37 +38,47 @@ class CartView extends Component {
   render() {
     return (
       <main className="wrapper">
-        <div className="title">Cart</div>
+        <div
+          className="inner-wrapper-overlay"
+          style={
+            this.props.overlay.value
+              ? { display: "block" }
+              : { display: "none" }
+          }
+        ></div>
+        <div className="inner-wrapper">
+          <div className="title">Cart</div>
 
-        <div className={styles.items}>
-          {this.props.cart.items.map((item) => (
-            <CartItem key={item.id + Math.random()} item={item} big={true} />
-          ))}
+          <div className={styles.items}>
+            {this.props.cart.items.map((item) => (
+              <CartItem key={item.id + Math.random()} item={item} big={true} />
+            ))}
 
-          <div style={{ borderTop: "1px solid #E5E5E5" }}></div>
-        </div>
-
-        <div className={styles.info}>
-          <div>
-            <div className={styles.quantity}>Tax 21%:</div>
-
-            <div className={styles.quantity}>Quantity:</div>
-
-            <div className={styles.quantity}>Total:</div>
+            <div style={{ borderTop: "1px solid #E5E5E5" }}></div>
           </div>
-          <div>
-            <div className={styles.quantity}>
-              <span>$42.00</span>
-            </div>
 
-            <div className={styles.quantity}>
-              <span>{this.totalQuantity()}</span>
-            </div>
+          <div className={styles.info}>
+            <div>
+              <div className={styles.quantity}>Tax 21%:</div>
 
-            <div className={styles.quantity}>
-              <span>
-                {this.props.currency.value} {this.totalSum()}
-              </span>
+              <div className={styles.quantity}>Quantity:</div>
+
+              <div className={styles.quantity}>Total:</div>
+            </div>
+            <div>
+              <div className={styles.quantity}>
+                <span>$42.00</span>
+              </div>
+
+              <div className={styles.quantity}>
+                <span>{this.totalQuantity()}</span>
+              </div>
+
+              <div className={styles.quantity}>
+                <span>
+                  {this.props.currency.value} {this.totalSum()}
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -80,6 +90,7 @@ class CartView extends Component {
 const mapStateToProps = (state) => ({
   cart: state.cart,
   currency: state.currency,
+  overlay: state.overlay,
 });
 
 export default connect(mapStateToProps, {})(CartView);

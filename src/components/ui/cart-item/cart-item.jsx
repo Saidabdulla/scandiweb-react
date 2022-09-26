@@ -18,18 +18,18 @@ import {
 import styles from "./cart-item.module.css";
 
 class CartItem extends Component {
-  setSelectedAttr(name, value) {
-    let str = name.replaceAll(" ", "");
-    let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
-    const stateName = `selected${secondPart}`;
+  // setSelectedAttr(name, value) {
+  //   let str = name.replaceAll(" ", "");
+  //   let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
+  //   const stateName = `selected${secondPart}`;
 
-    const prevObject = _.cloneDeep(this.props.item);
-    const nextObject = _.cloneDeep(this.props.item);
+  //   const prevObject = _.cloneDeep(this.props.item);
+  //   const nextObject = _.cloneDeep(this.props.item);
 
-    nextObject.item[stateName] = value;
+  //   nextObject.item[stateName] = value;
 
-    this.props.editActiveAttribute([prevObject, nextObject]);
-  }
+  //   this.props.editActiveAttribute([prevObject, nextObject]);
+  // }
 
   checkActiveOrnot(name, value) {
     let str = name.replaceAll(" ", "");
@@ -87,9 +87,6 @@ class CartItem extends Component {
                               : null
                           }`}
                           key={item.value}
-                          onClick={() =>
-                            this.setSelectedAttr(att.name, item.value)
-                          }
                         >
                           <SizeBtn
                             big={this.props.big}
@@ -98,13 +95,7 @@ class CartItem extends Component {
                           />
                         </div>
                       ) : (
-                        <div
-                          className={styles["mid-btn"]}
-                          key={item.value}
-                          onClick={() =>
-                            this.setSelectedAttr(att.name, item.displayValue)
-                          }
-                        >
+                        <div className={styles["mid-btn"]} key={item.value}>
                           <Color
                             big={this.props.big}
                             active={this.checkActiveOrnot(
