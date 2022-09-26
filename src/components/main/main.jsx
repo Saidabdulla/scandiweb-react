@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Query } from "@apollo/client/react/components";
 import { connect } from "react-redux";
+import { overlayToggle } from "../../actions/modal-actions.js";
 import { GET_PRODUCTS } from "../../graphql/queries";
 import Card from "../ui/card/card";
 
@@ -9,7 +10,7 @@ import "./main.css";
 class All extends Component {
   render() {
     return (
-      <main className="wrapper">
+      <main className="wrapper" onClick={() => this.props.overlayToggle(false)}>
         <div
           className="inner-wrapper-overlay"
           style={
@@ -47,4 +48,4 @@ const mapStateToProps = (state) => ({
   overlay: state.overlay,
 });
 
-export default connect(mapStateToProps, {})(All);
+export default connect(mapStateToProps, { overlayToggle })(All);

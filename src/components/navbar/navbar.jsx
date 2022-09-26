@@ -39,108 +39,112 @@ class Navbar extends Component {
   render() {
     return (
       <>
-        <div className={styles.navbar}>
-          <ul className={styles.list}>
-            <Query query={GET_CATEGORIES}>
-              {({ loading, error, data }) => {
-                if (error) return error;
-                if (loading || !data) return "loading...";
+        <div onClick={() => this.props.overlayToggle(false)}>
+          <div className={styles.navbar}>
+            <ul className={styles.list}>
+              <Query query={GET_CATEGORIES}>
+                {({ loading, error, data }) => {
+                  if (error) return error;
+                  if (loading || !data) return "loading...";
 
-                const { categories } = data;
-                return categories.map((cat) => (
-                  <NavLink
-                    onClick={() => this.props.overlayToggle(false)}
-                    key={cat.name}
-                    className={styles.link}
-                    to={cat.name}
-                  >
-                    {cat.name}
-                  </NavLink>
-                ));
-              }}
-            </Query>
-          </ul>
+                  const { categories } = data;
+                  return categories.map((cat) => (
+                    <NavLink
+                      onClick={() => this.props.overlayToggle(false)}
+                      key={cat.name}
+                      className={styles.link}
+                      to={cat.name}
+                    >
+                      {cat.name}
+                    </NavLink>
+                  ));
+                }}
+              </Query>
+            </ul>
 
-          <Link className={styles.logo} to="/all">
-            <IconLogo onClick={() => this.props.overlayToggle(false)} />
-          </Link>
+            <Link className={styles.logo} to="/all">
+              <IconLogo onClick={() => this.props.overlayToggle(false)} />
+            </Link>
 
-          <div className={styles.right}>
-            <button
-              type="button"
-              className={styles["currency-btn"]}
-              onClick={() => {
-                this.setState((prevState, props) => ({
-                  showCurrencyModal: !prevState.showCurrencyModal,
-                }));
+            <div className={styles.right}>
+              <button
+                type="button"
+                className={styles["currency-btn"]}
+                onClick={() => {
+                  this.setState((prevState, props) => ({
+                    showCurrencyModal: !prevState.showCurrencyModal,
+                  }));
 
-                this.props.overlayToggle(false);
-              }}
-            >
-              <div>{this.props.currency.value}</div>
-              <svg
-                width="8"
-                height="4"
-                viewBox="0 0 8 4"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
+                  this.props.overlayToggle(false);
+                }}
               >
-                <path
-                  d="M1 0.5L4 3.5L7 0.5"
-                  stroke="black"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <button
-              onClick={() =>
-                this.clickCartBtnHandler(!this.props.overlay.value)
-              }
-              type="button"
-              className={styles["cart-btn"]}
-            >
-              <IconCart />
-
-              <div
-                style={
-                  !this.props.cart.items.length ? { display: "none" } : null
-                }
-                className={styles.counter}
+                <div>{this.props.currency.value}</div>
+                <svg
+                  width="8"
+                  height="4"
+                  viewBox="0 0 8 4"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M1 0.5L4 3.5L7 0.5"
+                    stroke="black"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  this.clickCartBtnHandler(!this.props.overlay.value);
+                }}
+                type="button"
+                className={styles["cart-btn"]}
               >
-                {this.props.cart.items.length}
-              </div>
-            </button>
+                <IconCart />
 
-            <Cart isShow={this.props.overlay.value} />
-            {/* show the modal conditionally */}
-            {this.state.showCurrencyModal ? (
-              <ul className={styles["currency-modal"]}>
-                <Query query={GET_CURRENCIES}>
-                  {({ loading, error, data }) => {
-                    if (error) return error;
-                    if (loading || !data) return "loading...";
+                <div
+                  style={
+                    !this.props.cart.items.length ? { display: "none" } : null
+                  }
+                  className={styles.counter}
+                >
+                  {this.props.cart.items.length}
+                </div>
+              </button>
 
-                    const { currencies } = data;
-                    return currencies.map((cy) => (
-                      <li
-                        onClick={() => this.clickCurrencyHandler(cy.symbol)}
-                        className={
-                          cy.symbol === this.props.currency.value
-                            ? "currency-active"
-                            : ""
-                        }
-                        key={cy.symbol}
-                      >
-                        {cy.symbol} {cy.label}
-                      </li>
-                    ));
-                  }}
-                </Query>
-              </ul>
-            ) : null}
+              <Cart isShow={this.props.overlay.value} />
+              {/* show the modal conditionally */}
+              {this.state.showCurrencyModal ? (
+                <ul className={styles["currency-modal"]}>
+                  <Query query={GET_CURRENCIES}>
+                    {({ loading, error, data }) => {
+                      if (error) return error;
+                      if (loading || !data) return "loading...";
+
+                      const { currencies } = data;
+                      return currencies.map((cy) => (
+                        <li
+                          onClick={() => this.clickCurrencyHandler(cy.symbol)}
+                          className={
+                            cy.symbol === this.props.currency.value
+                              ? "currency-active"
+                              : ""
+                          }
+                          key={cy.symbol}
+                        >
+                          {cy.symbol} {cy.label}
+                        </li>
+                      ));
+                    }}
+                  </Query>
+                </ul>
+              ) : null}
+            </div>
           </div>
         </div>
+
         <Outlet />
       </>
     );

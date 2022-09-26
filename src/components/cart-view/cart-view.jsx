@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { overlayToggle } from "../../actions/modal-actions.js";
 import CartItem from "../ui/cart-item/cart-item";
 
 import styles from "./cart-view.module.css";
@@ -37,7 +38,7 @@ class CartView extends Component {
 
   render() {
     return (
-      <main className="wrapper">
+      <main className="wrapper" onClick={() => this.props.overlayToggle(false)}>
         <div
           className="inner-wrapper-overlay"
           style={
@@ -93,4 +94,4 @@ const mapStateToProps = (state) => ({
   overlay: state.overlay,
 });
 
-export default connect(mapStateToProps, {})(CartView);
+export default connect(mapStateToProps, { overlayToggle })(CartView);
