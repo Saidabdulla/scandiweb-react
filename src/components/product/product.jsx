@@ -24,56 +24,68 @@ class Product extends Component {
 
   render() {
     return (
-      <Query query={GET_PRODUCT_BY_ID} variables={{ id: this.state.id }}>
-        {({ loading, error, data }) => {
-          if (error) return error;
-          if (loading || !data) return "loading...";
+      <div className={styles["pdp-wrapper"]}>
+        <div
+          className={styles["pdp-wrapper-overlay"]}
+          style={
+            this.props.overlay.value
+              ? { display: "block" }
+              : { display: "none" }
+          }
+        ></div>
 
-          const prod = data.product;
-          const product = sortProductAttrs(prod, true);
+        <Query query={GET_PRODUCT_BY_ID} variables={{ id: this.state.id }}>
+          {({ loading, error, data }) => {
+            if (error) return error;
+            if (loading || !data) return "loading...";
 
-          return (
-            <main className={styles.pdp}>
-              <div className={styles.left}>
-                <div className={styles.images}>
-                  {product.gallery.map((img, index) => {
-                    return (
-                      <div className={styles.container} key={img}>
-                        <img
-                          loading="lazy"
-                          src={img}
-                          alt="product"
-                          onClick={() => this.setState({ imageUrl: img })}
-                        />
-                      </div>
-                    );
-                  })}
+            const prod = data.product;
+            const product = sortProductAttrs(prod, true);
+
+            return (
+              <main className={styles.pdp}>
+                <div className={styles.left}>
+                  <div className={styles.images}>
+                    {product.gallery.map((img, index) => {
+                      return (
+                        <div className={styles.container} key={img}>
+                          <img
+                            loading="lazy"
+                            src={img}
+                            alt="product"
+                            onClick={() => this.setState({ imageUrl: img })}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div className={styles.image}>
+                    <img
+                      loading="lazy"
+                      src={
+                        this.state.imageUrl
+                          ? this.state.imageUrl
+                          : product.gallery[0]
+                      }
+                      alt="product"
+                    />
+                  </div>
                 </div>
-                <div className={styles.image}>
-                  <img
-                    loading="lazy"
-                    src={
-                      this.state.imageUrl
-                        ? this.state.imageUrl
-                        : product.gallery[0]
-                    }
-                    alt="product"
-                  />
+                <div className={styles.right}>
+                  <Details product={product} id={this.state.id} />
                 </div>
-              </div>
-              <div className={styles.right}>
-                <Details product={product} id={this.state.id} />
-              </div>
-            </main>
-          );
-        }}
-      </Query>
+              </main>
+            );
+          }}
+        </Query>
+      </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
   currency: state.currency,
+  overlay: state.overlay,
 });
 
 export default connect(mapStateToProps, {})(withParams(Product));

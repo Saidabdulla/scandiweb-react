@@ -1,8 +1,9 @@
 import { Component } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { GET_CATEGORIES } from "./graphql/queries";
 import { connect } from "react-redux";
+import { graphql } from "@apollo/client/react/hoc";
 import Navbar from "./components/navbar/navbar";
-import Footer from "./components/footer/footer";
 import Main from "./components/main/main";
 import Product from "./components/product/product";
 import CartView from "./components/cart-view/cart-view";
@@ -20,16 +21,19 @@ class App extends Component {
             <Route path="/" element={<Navbar />}>
               <Route index element={<Navigate to="all" replace />} />
 
-              <Route path="all" element={<Main page="all" />}></Route>
-              <Route path="tech" element={<Main page="tech" />}></Route>
-              <Route path="clothes" element={<Main page="clothes" />}></Route>
+              {this.props.data?.categories?.map((cat) => (
+                <Route
+                  key={cat.name}
+                  path={cat.name}
+                  element={<Main page={cat.name} />}
+                ></Route>
+              ))}
 
               <Route path="cart" element={<CartView />} />
               <Route path="/product/:id" element={<Product />} />
             </Route>
           </Routes>
         </BrowserRouter>
-        <Footer />
       </div>
     );
   }
@@ -39,4 +43,4 @@ const mapStateToProps = (state) => ({
   overlay: state.overlay,
 });
 
-export default connect(mapStateToProps, {})(App);
+export default connect(mapStateToProps, {})(graphql(GET_CATEGORIES)(App));

@@ -20,6 +20,10 @@ class Navbar extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.overlayToggle(false);
+  }
+
   // updates store and closes currency modal
   clickCurrencyHandler = (value) => {
     this.props.changeCurrency(value);

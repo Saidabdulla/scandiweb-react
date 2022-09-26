@@ -1,14 +1,33 @@
 /* Wanna use this file in 3 components */
 
 .wrapper {
-  padding: 0 100px 100px 100px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.inner-wrapper {
+  padding: 80px 100px 100px 100px;
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
 }
 
+.inner-wrapper-overlay {
+  position: absolute;
+  height: 100%;
+  max-width: 100%;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(57, 55, 72, 0.22);
+  z-index: 3;
+}
+
 .title {
-  margin: 80px 0;
+  margin-bottom: 80px;
   font-size: 42px;
 }
 
