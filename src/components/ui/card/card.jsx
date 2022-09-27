@@ -8,10 +8,26 @@ import { ReactComponent as IconBasket } from "../../../assets/img/green_basket.s
 
 class Card extends Component {
   onClickGreenBasket() {
+    const selecteds = {};
+
+    this.props.product.attributes.forEach((element) => {
+      const name = element.name;
+      const value =
+        element.name.toLowerCase() === "color"
+          ? element.items[0].displayValue
+          : element.items[0].value;
+
+      let str = name.replaceAll(" ", "");
+      let secondPart = str.charAt(0).toUpperCase() + str.slice(1);
+
+      selecteds[`selected${secondPart}`] = value;
+    });
+
     const product = {
       id: this.props.product.id,
       quantity: 1,
       item: {
+        ...selecteds,
         name: this.props.product.name,
         brand: this.props.product.brand,
         prices: this.props.product.prices,
